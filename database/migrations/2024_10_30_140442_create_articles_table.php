@@ -13,7 +13,26 @@ return new class extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            
+            // not sure how to handle if topic is deleted?
+            $table->foreign('topic_id')->references('id')->on('topics')->nullOnDelete()->onUpdate('cascade');
+            
+            $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            
+            // maybe have templates?
+
+            $table->string('title');
+            $table->string('content');
+            $table->integer('unique_views')->default(0); // maybe this isnt great
+            
+            // Should ratings be visible? or should it be like tags instead interesting, informative...
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
+            
+            // edited flag
+            $table->boolean('edited')->default(false);
+
+            $table->timestamps(); // has created at and last updated at
         });
     }
 
