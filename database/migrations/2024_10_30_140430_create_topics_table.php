@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->id();
+            // templates? for well layed out topics?
+        
+            // Author of topic, not sure i want it to cascade deleting? So null on delete?
+            $table->foreign('author_id')->references('id')->on('users')->nullOnDelete()->onUpdate('cascade');
+
+            // Title of topic
+            $table->string('title');
+
+            // Content
+            $table->string('content'); // Probably need to do multi-media here
+            
+            // Seperate date which keeps track of actual topic date?
+            $table->date('date')->nullable();
             $table->timestamps();
         });
     }
