@@ -13,6 +13,26 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+
+            // Author (maybe change author_id to user_id)
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            
+            // Parent
+            $table->integer('parent_id')->nullable()->references('id')->on('comments')->onDelete('cascade'); // maybe on update?
+
+            // Content
+            $table->string('content');
+            
+            // Ratings
+            $table->integer('likes')->default(0);
+            $table->integer('dislikes')->default(0);
+            
+            // Edited flag
+            $table->boolean('edited')->default(false);
+
+            // Commentable
+            $table->morphs('commentable'); // Can comment under comments or articles
+
             $table->timestamps();
         });
     }
