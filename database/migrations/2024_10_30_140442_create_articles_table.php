@@ -23,14 +23,11 @@ return new class extends Migration
 
             $table->string('title');
             $table->string('content');
-            $table->integer('unique_views')->default(0); // maybe this isnt great
-            
-            // Should ratings be visible? or should it be like tags instead interesting, informative...
-            $table->integer('likes')->default(0);
-            $table->integer('dislikes')->default(0);
             
             // edited flag
             $table->boolean('edited')->default(false);
+            // original content
+            $table->string('original_content')->nullable()->default(null);
 
             $table->timestamps(); // has created at and last updated at
         });
