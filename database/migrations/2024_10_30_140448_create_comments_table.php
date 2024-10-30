@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
 
             // Author (maybe change author_id to user_id)
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             
             // Parent
-            $table->integer('parent_id')->nullable()->references('id')->on('comments')->onDelete('cascade'); // maybe on update?
+            $table->integer('parent_id')->nullable()->references('id')->on('comments')->cascadeOnDelete()->cascadeOnUpdate(); // maybe on update?
 
             // Content
             $table->string('content');
