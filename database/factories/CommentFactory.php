@@ -21,10 +21,11 @@ class CommentFactory extends Factory
     public function definition(): array
     {
         $isEdited = $this->faker->boolean(20);
+        $article = Article::factory()->create();
         return [
             'author_id' => User::factory(),
-            'article_id' => Article::factory(),
-            'parent_id' => Comment::factory(),
+            'article_id' => $article->id,
+            'parent_id' => $this->faker->boolean(20) ? Comment::factory()->for($article)->create()->id : null,
             'content' => $this->faker->sentence(),
             'edited' => $isEdited,
             'original_content' => $isEdited ? $this->faker->sentence() : null,

@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 // Need to enforce that when a comment under a comment is added, it has a parent id.
 class Comment extends Model
 {
+    use HasFactory;
+
     // Reply comments
     public function replies() {
         return $this->hasMany(Comment::class, 'parent_id');
