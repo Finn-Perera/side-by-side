@@ -15,22 +15,24 @@ return new class extends Migration
             $table->id();
 
             // Author (maybe change author_id to user_id)
+            $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             
             // Article
+            $table->unsignedBigInteger('article_id')->nullable();
             $table->foreign('article_id')->references('id')->on('articles')->cascadeOnDelete()->cascadeOnUpdate();
 
             // Parent comment
-            $table->integer('parent_id')->nullable()->references('id')->on('comments')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedBigInteger('parent_id')->nullable()->references('id')->on('comments')->cascadeOnDelete()->cascadeOnUpdate();
 
             // Content
-            $table->string('content');
+            $table->text('content');
             
             // Edited flag
             $table->boolean('edited')->default(false);
 
             // Original content
-            $table->string('original_content')->nullable()->default(null);
+            $table->text('original_content')->nullable()->default(null);
 
             $table->timestamps();
         });
