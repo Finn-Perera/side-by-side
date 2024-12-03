@@ -60,4 +60,20 @@ class User extends Authenticatable
     public function articles() {
         return $this->hasMany(Article::class);
     }
+
+    // Users that this user follows
+    public function following() {
+        return $this->belongsToMany(User::class,
+        'user_user',
+        'follower_id',
+        'following_id');
+    }
+
+    // Users following this user
+    public function followers() {
+        return $this->belongsToMany(User::class,
+            'user_user',
+            'following_id',
+            'follower_id');
+    }
 }
