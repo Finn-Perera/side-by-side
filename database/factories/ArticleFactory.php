@@ -18,11 +18,11 @@ class ArticleFactory extends Factory
      */
     public function definition(): array
     {
-        $isEdited = $this->faker->boolean(50);
+        $isEdited = $this->faker->boolean(chanceOfGettingTrue: 50);
         return [
-            'topic_id' => Topic::factory(),
-            'author_id'=> User::factory(),
-            'title' => $this->faker->words(3, true),
+            'topic_id' => Topic::inRandomOrder()->first()->id,
+            'author_id'=> User::inRandomOrder()->first()->id,
+            'title' => $this->faker->words(nb: 3, asText: true),
             'content' => $this->faker->paragraph(),
             'edited' => $isEdited,
             'original_content' => $isEdited ? $this->faker->paragraph() : null,

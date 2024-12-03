@@ -6,7 +6,7 @@ use App\Models\Article;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,12 +16,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = User::factory(10)->create();
+        // Create users
+        $users = User::factory(20)->create();
 
-        $topics = Topic::factory(4)->recycle($users)->create();
+        // Create topics
+        $topics = Topic::factory(6)->create();
 
-        $articles = Article::factory(7)->recycle($users)->recycle($topics)->create();
+        // Create articles
+        $articles = Article::factory(8)->create();
 
-        Comment::factory(15)->recycle($users)->recycle($articles)->create();
+        // Create root comments (no parent)
+        Comment::factory(14)->create();
+
+        // Child comments
+        Comment::factory()->count(6)->child()->create();
+        // Can create more deep comment chain with more calls
+        Comment::factory()->count(6)->child()->create();
     }
 }

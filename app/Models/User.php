@@ -46,19 +46,18 @@ class User extends Authenticatable
         ];
     }
 
+    // Comments user has made
     public function comments() {
         return $this->hasMany(Comment::class);
     }
 
+    // Topics user has made
     public function topics(){
         return $this->hasMany(Topic::class);
     }
 
+    // Articles user has made
     public function articles() {
         return $this->hasMany(Article::class);
-    }
-
-    public function hasTopics(){
-        return $this->topics()->exists();
     }
 }

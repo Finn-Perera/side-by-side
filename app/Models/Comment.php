@@ -20,6 +20,7 @@ class Comment extends Model
         return $this->belongsTo(Comment::class, 'parent_id');
     }
 
+    // Article comment is under
     public function article() {
         return $this->belongsTo(Article::class,'article_id');
     }

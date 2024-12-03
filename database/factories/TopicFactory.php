@@ -19,10 +19,10 @@ class TopicFactory extends Factory
     public function definition(): array
     {
         return [
-            'author_id' => User::factory(),
-            'title' => $this->faker->words(3, true),
+            'author_id'=> User::inRandomOrder()->first()->id,
+            'title' => $this->faker->words(nb: 3, asText: true),
             'content' => $this->faker->paragraph(),
-            'date' => $this->faker->dateTimeBetween('-30 years','now'),
+            'date' => $this->faker->dateTimeBetween(startDate: '-30 years', endDate: 'now'),
         ];
     }
 }

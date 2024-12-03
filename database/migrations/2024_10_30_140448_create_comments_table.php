@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
 
-            // Author (maybe change author_id to user_id)
+            // Author of comment
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             
-            // Article
+            // Article comment is under
             $table->unsignedBigInteger('article_id')->nullable();
             $table->foreign('article_id')->references('id')->on('articles')->cascadeOnDelete()->cascadeOnUpdate();
 
@@ -31,7 +31,7 @@ return new class extends Migration
             // Edited flag
             $table->boolean('edited')->default(false);
 
-            // Original content
+            // Original content (if edited)
             $table->text('original_content')->nullable()->default(null);
 
             $table->timestamps();
