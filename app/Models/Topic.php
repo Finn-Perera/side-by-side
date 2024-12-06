@@ -11,7 +11,7 @@ class Topic extends Model
 
     // Articles relating to topic
     public function articles() {
-        return $this->hasMany(Article::class, 'article_id');
+        return $this->hasMany(Article::class, 'topic_id');
     }
 
     // Author of topic

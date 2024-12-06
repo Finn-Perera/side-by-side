@@ -1,11 +1,19 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/topics', [TopicController::class, 'index'])->name('topics.all');
+
+Route::get('/topics/{id}', [TopicController::class, 'show'])->name('topics.show');
+
+Route::get('/article/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
 Route::get('/secret', function() {
     return "secret";
