@@ -9,11 +9,6 @@ class Article extends Model
 {
     use HasFactory;
 
-    // Comments under article
-    public function comments() {
-        return $this->hasMany(Comment::class);
-    }
-
     // Topic article relates to
     public function topic() {
         return $this->belongsTo(Topic::class,'topic_id');
@@ -22,5 +17,14 @@ class Article extends Model
     // Author of article
     public function author() {
         return $this->belongsTo(User::class,'author_id');
+    }
+
+    // Comments under article
+    public function parentComments() { 
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+
+    public function allComments() { 
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

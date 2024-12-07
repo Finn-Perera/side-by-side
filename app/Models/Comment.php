@@ -10,23 +10,23 @@ class Comment extends Model
 {
     use HasFactory;
 
-    // Reply comments
-    public function replies() {
-        return $this->hasMany(Comment::class, 'parent_id');
-    }
-
     // Parent comment
     public function parent(){
         return $this->belongsTo(Comment::class, 'parent_id');
     }
 
-    // Article comment is under
-    public function article() {
-        return $this->belongsTo(Article::class,'article_id');
+    // Reply comments
+    public function replies() {
+        return $this->hasMany(Comment::class, 'parent_id');
     }
 
     // Author of comment
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    // Allows morphing to any commentable resource
+    public function commentable() {
+        return $this->morphTo();
     }
 }

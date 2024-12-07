@@ -13,5 +13,13 @@
     </ul>
     <h4>Content: </h4>
     <p>{{ $article->content }}</p>
-    
+@endsection
+
+@section('comments')
+    <h4>Comments Section: </h4>
+    @if ($article->parentComments)
+        @include('partials.comments', ['comments' => $article->parentComments])
+    @else
+        <p> No comments yet! </p>
+    @endif
 @endsection

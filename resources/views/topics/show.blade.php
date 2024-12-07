@@ -16,3 +16,12 @@
         @endforeach
     </ul>
 @endsection
+
+@section('comments')
+    <h4>Comments Section: </h4>
+    @if ($topic->parentComments)
+        @include('partials.comments', ['comments' => $topic->parentComments])
+    @else
+        <p> No comments yet! </p>
+    @endif
+@endsection

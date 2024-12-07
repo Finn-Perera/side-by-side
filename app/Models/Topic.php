@@ -18,4 +18,13 @@ class Topic extends Model
     public function author() {
         return $this->belongsTo(User::class, 'author_id');
     }
+
+    // Comments under article
+    public function parentComments() { 
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+
+    public function allComments() { 
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

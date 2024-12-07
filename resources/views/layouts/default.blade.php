@@ -30,6 +30,10 @@
             <div>
                 @yield('content')
             </div>
+
+            <div>
+                @yield('comments')
+            </div>
         </div>
     </body>
 </html>
