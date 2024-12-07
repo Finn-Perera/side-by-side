@@ -12,7 +12,24 @@
     <body>
         <h1> Side By Side - @yield('title') </h1>
         <div>
-            @yield('content')
+            @if ($errors->any())
+                <div>
+                    Errors:
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            @if (session('message'))
+                <p><b> {{ session('message') }}</b></p>
+            @endif
+
+            <div>
+                @yield('content')
+            </div>
         </div>
     </body>
 </html>

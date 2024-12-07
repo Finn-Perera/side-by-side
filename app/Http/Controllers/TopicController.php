@@ -22,7 +22,7 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        return view('topics.create');
     }
 
     /**
@@ -30,7 +30,23 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $verified_data = $request->validate([
+            'title' => 'required|max:255',
+            'author_id' => 'nullable|numeric',
+            'date' => 'nullable|date',
+            'content' => 'required|string',
+        ]);
+
+        $t = new Topic;
+        $t->title = $verified_data['title'];
+        $t->author_id = $verified_data['author_id'];
+        $t->date = $verified_data['date'];
+        $t->content = $verified_data['content'];
+        $t->save();
+
+        session()->flash('message', 'Topic was created.');
+        
+        return redirect()->route('topics.index');
     }
 
     /**

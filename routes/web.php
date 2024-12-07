@@ -9,9 +9,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/topics', [TopicController::class, 'index'])->name('topics.all');
+
+Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
+
+Route::get('/topics/create', [TopicController::class, 'create'])->name('topics.create');
+
+Route::post('/topics', [TopicController::class, 'store'])->name('topics.store');
 
 Route::get('/topics/{id}', [TopicController::class, 'show'])->name('topics.show');
+
 
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
