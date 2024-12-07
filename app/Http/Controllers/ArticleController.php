@@ -62,6 +62,11 @@ class ArticleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $parent_topic = $article->topic;
+        $route = $parent_topic == null ? route('topics.index') : route('topics.show', ['id' => $parent_topic->id]);
+        $article->delete();
+
+        return redirect($route)->with('message', 'Article was deleted');
     }
 }

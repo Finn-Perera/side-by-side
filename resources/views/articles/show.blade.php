@@ -13,6 +13,12 @@
     </ul>
     <h4>Content: </h4>
     <p>{{ $article->content }}</p>
+
+    <form method="post" action="{{ route('articles.destroy', ['id' => $article->id]) }}">
+        @csrf
+        @method('DELETE')
+        <button type="submit"> Delete </button>
+    </form>
 @endsection
 
 @section('comments')

@@ -21,6 +21,9 @@ Route::get('/topics/{id}', [TopicController::class, 'show'])->name('topics.show'
 
 Route::get('/article/{id}', [ArticleController::class, 'show'])->name('articles.show');
 
+Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+
+
 Route::get('/secret', function() {
     return "secret";
 })->middleware(['auth']);

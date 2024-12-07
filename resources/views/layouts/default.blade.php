@@ -24,7 +24,7 @@
             @endif
 
             @if (session('message'))
-                <p><b> {{ session('message') }}</b></p>
+                <p style="color : red;"><b> {{ session('message') }}</b></p>
             @endif
 
             <div>
