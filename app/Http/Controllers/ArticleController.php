@@ -34,17 +34,15 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
-
         return view('articles.show', ['article' => $article]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
         //
     }
@@ -52,7 +50,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Article $article)
     {
         //
     }
@@ -60,11 +58,10 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Article $article)
     {
-        $article = Article::findOrFail($id);
         $parent_topic = $article->topic;
-        $route = $parent_topic == null ? route('topics.index') : route('topics.show', ['id' => $parent_topic->id]);
+        $route = $parent_topic == null ? route('topics.index') : route('topics.show', $parent_topic);
         $article->delete();
 
         return redirect($route)->with('message', 'Article was deleted');

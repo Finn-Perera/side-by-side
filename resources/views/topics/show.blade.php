@@ -12,14 +12,14 @@
     <p> Articles on the topic: </p>
     <ul>
         @foreach ($topic->articles as $article)
-            <li><a href=" {{route('articles.show', [$article->id])}}">{{ $article->title }}</a></li>
+            <li><a href=" {{route('articles.show', $article)}}">{{ $article->title }}</a></li>
         @endforeach
     </ul>
 @endsection
 
 @section('comments')
     <h4>Comments Section: </h4>
-    @if ($topic->parentComments)
+    @if ($topic->parentComments->count() > 0)
         @include('partials.comments', ['comments' => $topic->parentComments])
     @else
         <p> No comments yet! </p>

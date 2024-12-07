@@ -52,17 +52,15 @@ class TopicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Topic $topic)
     {
-        $topic = Topic::findOrFail($id);
-
         return view('topics.show', ['topic' => $topic]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Topic $topic)
     {
         //
     }
@@ -70,7 +68,7 @@ class TopicController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Topic $topic)
     {
         //
     }
@@ -78,7 +76,7 @@ class TopicController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Topic $topic)
     {
         //
     }

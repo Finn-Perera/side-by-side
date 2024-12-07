@@ -16,12 +16,12 @@ Route::get('/topics/create', [TopicController::class, 'create'])->name('topics.c
 
 Route::post('/topics', [TopicController::class, 'store'])->name('topics.store');
 
-Route::get('/topics/{id}', [TopicController::class, 'show'])->name('topics.show');
+Route::get('/topics/{topic}', [TopicController::class, 'show'])->name('topics.show');
 
 
-Route::get('/article/{id}', [ArticleController::class, 'show'])->name('articles.show');
+Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
 
-Route::delete('/article/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
+Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
 
 
 Route::get('/secret', function() {
