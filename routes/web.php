@@ -11,7 +11,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
 
 Route::get('/topics/create', [TopicController::class, 'create'])->name('topics.create');
@@ -33,6 +32,8 @@ Route::get('/users/{user}/topics', [TopicController::class, 'showUserTopics'])->
 Route::get('/users/{user}/articles', [ArticleController::class, 'showUserArticles'])->name('users.articles');
 
 Route::get('/users/{user}/profile', [ProfileController::class, 'show'])->name('profiles.show');
+
+Route::post('/comments', [CommentController::class, 'store'])->middleware(['auth'])->name('comments.store');
 
 Route::get('/secret', function() {
     return "secret";

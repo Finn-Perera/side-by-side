@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -29,7 +30,28 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'content' => 'required|string|max:1000', // Could change value here
+            'parent_id' => 'nullable|numeric',
+            'commentable_type' => 'required|string',
+            'commentable_id' => 'required|integer',
+        ]);
+
+        $commentableClass = $request->input('commentable_type');
+        $commentableId = $request->input('commentable_id');
+        if(!class_exists($commentableClass)) {
+            abort(404, 'Invalid commentable type');
+        }
+    
+        $comment = new Comment;
+        $comment->content = $request['content'];
+        $comment->commentable_type = $commentableClass;
+        $comment->commentable_id = $commentableId;
+        $comment->parent_id = $request->parent_id ?? null;
+        $comment->author_id = Auth::user()->id;
+        $comment->save();
+
+        return back()->with('message', 'Comment added successfully');
     }
 
     /**
