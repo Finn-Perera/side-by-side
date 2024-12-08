@@ -24,7 +24,7 @@
 @section('comments')
     <h4>Comments Section: </h4>
     @if ($article->parentComments->count() > 0)
-        @include('partials.comments', ['comments' => $article->parentComments])
+        @include('comments.partials.display-comments', ['comments' => $article->parentComments])
     @else
         <p> No comments yet! </p>
     @endif

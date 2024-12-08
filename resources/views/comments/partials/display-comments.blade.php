@@ -6,7 +6,7 @@
 
     @if ($comment->replies->count())
         <div class="replies"> 
-            @include('partials.comments', ['comments' => $comment->replies])
+            @include('comments.partials.display-comments', ['comments' => $comment->replies])
         </div>
     @endif
 @endforeach
