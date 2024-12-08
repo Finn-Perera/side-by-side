@@ -48,17 +48,17 @@ class User extends Authenticatable
 
     // Comments user has made
     public function comments() {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'author_id');
     }
 
     // Topics user has made
     public function topics(){
-        return $this->hasMany(Topic::class);
+        return $this->hasMany(Topic::class, 'author_id');
     }
 
     // Articles user has made
     public function articles() {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class, 'author_id');
     }
 
     // Users that this user follows
