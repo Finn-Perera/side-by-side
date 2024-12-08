@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
 
-class ArticleController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,21 +35,23 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article)
+    public function show(string $id)
     {
-        return view('articles.show', ['article' => $article]);
+        //
     }
 
-    public function showUserArticles(User $user) {
-        $articles = $user->articles();
-        
-        return view('users.articles', ['user' => $user, 'articles' => $articles]);
+    /**
+     * Show users comments.
+     */
+    public function showUserComments(User $user) {
+        $comments = $user->comments()->with('commentable')->get();
+        return view('users.comments', ['user' => $user, 'comments' => $comments]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Article $article)
+    public function edit(string $id)
     {
         //
     }
@@ -57,7 +59,7 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -65,12 +67,8 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function destroy(string $id)
     {
-        $parent_topic = $article->topic;
-        $route = $parent_topic == null ? route('topics.index') : route('topics.show', $parent_topic);
-        $article->delete();
-
-        return redirect($route)->with('message', 'Article was deleted');
+        //
     }
 }

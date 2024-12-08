@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Topic;
+use App\Models\User;
+
 
 class TopicController extends Controller
 {
@@ -55,6 +57,10 @@ class TopicController extends Controller
     public function show(Topic $topic)
     {
         return view('topics.show', ['topic' => $topic]);
+    }
+
+    public function showUserTopics(User $user) {
+        return view('users.topics', ['user' => $user]);
     }
 
     /**
