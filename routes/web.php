@@ -13,7 +13,7 @@ Route::get('/', function () {
 
 Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
 
-Route::get('/topics/create', [TopicController::class, 'create'])->name('topics.create');
+Route::get('/topics/create', [TopicController::class, 'create'])->middleware(['auth'])->name('topics.create');
 
 Route::post('/topics', [TopicController::class, 'store'])->name('topics.store');
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Topic;
 use App\Models\User;
 
@@ -32,23 +33,25 @@ class TopicController extends Controller
      */
     public function store(Request $request)
     {
+        $yearsAhead = 1000;
+        $maxYear = now()->addYears($yearsAhead)->format('Y');
+
         $verified_data = $request->validate([
             'title' => 'required|max:255',
-            'author_id' => 'nullable|numeric',
-            'date' => 'nullable|date',
+            'date' => "nullable|date|before_or_equal:$maxYear",
             'content' => 'required|string',
+        ], [
+           'date.before_or_equal' => "The topic date must be before $yearsAhead years from current date.",
         ]);
 
         $t = new Topic;
         $t->title = $verified_data['title'];
-        $t->author_id = $verified_data['author_id'];
         $t->date = $verified_data['date'];
         $t->content = $verified_data['content'];
+        $t->author_id = Auth::user()->id;
         $t->save();
-
-        session()->flash('message', 'Topic was created.');
         
-        return redirect()->route('topics.index');
+        return redirect()->route('topics.index')->with('message', 'Topic was created.');
     }
 
     /**

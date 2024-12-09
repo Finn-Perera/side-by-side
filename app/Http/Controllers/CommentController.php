@@ -30,9 +30,10 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        // might want to check parent exists and commentable exists
         $request->validate([
             'content' => 'required|string|max:1000', // Could change value here
-            'parent_id' => 'nullable|numeric',
+            'parent_id' => 'nullable|numeric|exists:comments,id',
             'commentable_type' => 'required|string',
             'commentable_id' => 'required|integer',
         ]);
