@@ -18,9 +18,8 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('follower_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-
-            $table->foreign('following_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('follower_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('following_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

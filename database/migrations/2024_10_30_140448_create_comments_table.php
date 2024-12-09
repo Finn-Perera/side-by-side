@@ -21,8 +21,8 @@ return new class extends Migration
             $table->morphs('commentable');
             $table->timestamps();
 
-            $table->foreign('parent_id')->references('id')->on('comments')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('parent_id')->references('id')->on('comments')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

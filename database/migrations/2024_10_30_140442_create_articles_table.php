@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('original_content')->nullable()->default(null);
             $table->timestamps();
 
-            $table->foreign('author_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('topic_id')->references('id')->on('topics')->nullOnDelete()->onUpdate('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('set null')->onUpdate('cascade');
         });
     }
 

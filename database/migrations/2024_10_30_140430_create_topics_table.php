@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->timestamps();
 
-            $table->foreign('author_id')->references('id')->on('users')->nullOnDelete()->onUpdate('cascade');
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('set null')->onUpdate('cascade');
         });
     }
 
