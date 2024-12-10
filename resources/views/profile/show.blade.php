@@ -4,6 +4,8 @@
 
 @section('content')
     <h2> {{ $user->name }} </h2>
+    <p>{{ $user->profile->bio }}</p>
+    <p><b>Location: </b>{{ $user->profile->location }}</p>
     <ul>
         <li><a href="{{ route('users.articles', $user) }}">Articles</a> </li>
         <li><a href="{{ route('users.topics', $user) }}">Topics</a></li>

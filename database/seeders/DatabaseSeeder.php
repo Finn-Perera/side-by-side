@@ -6,6 +6,8 @@ use App\Models\Article;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Comment;
+use App\Models\Profile;
+
 
 use Illuminate\Database\Seeder;
 
@@ -17,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create users
-        $users = User::factory(20)->create();
+        $users = User::factory(20)->has(Profile::factory())->create();
 
         // Create topics
         $topics = Topic::factory(6)->create();
