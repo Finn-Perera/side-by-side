@@ -13,7 +13,8 @@ class Comment extends Model
         'commentable_type',
         'commentable_id',
         'parent_id',
-        'author_id'
+        'author_id',
+        'edited',
     ];
 
     use HasFactory;

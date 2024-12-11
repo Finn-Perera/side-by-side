@@ -13,6 +13,7 @@ class Article extends Model
         'title',
         'content',
         'author_id',
+        'edited',
     ];
 
     // Topic article relates to

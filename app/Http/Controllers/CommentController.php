@@ -25,35 +25,6 @@ class CommentController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        // might want to check parent exists and commentable exists
-        $request->validate([
-            'content' => 'required|string|max:1000', // Could change value here
-            'parent_id' => 'nullable|numeric|exists:comments,id',
-            'commentable_type' => 'required|string',
-            'commentable_id' => 'required|integer',
-        ]);
-
-        $commentableClass = $request->input('commentable_type');
-        $commentableId = $request->input('commentable_id');
-        if(!class_exists($commentableClass)) {
-            abort(404, 'Invalid commentable type');
-        }
-    
-        $comment = new Comment;
-        $comment->content = $request['content'];
-        $comment->commentable_type = $commentableClass;
-        $comment->commentable_id = $commentableId;
-        $comment->parent_id = $request->parent_id ?? null;
-        $comment->author_id = Auth::user()->id;
-        $comment->save();
-
-        return response()->json($comment);
-    }
 
     /**
      * Display the specified resource.

@@ -38,11 +38,11 @@ class CommentSection extends Component
             'content' => $this->commentContent,
             'commentable_id' => $this->commentableId,
             'commentable_type' => $this->commentableType,
-            'parent_id' => null,
+            'parent_id' => $this->parent_id,
             'author_id' => Auth::user()->id,
         ]);
 
-        $this->reset('commentContent');
+        $this->reset('commentContent', 'parent_id');
         $this->loadComments();
     }
     

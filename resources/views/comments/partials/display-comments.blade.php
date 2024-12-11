@@ -1,11 +1,9 @@
 <ul>
 @foreach ($comments as $comment)
     <li class="comment">
-        <p>{{ $comment->content }}</p>
+        @livewire('comment-editor', ['comment' => $comment], key($comment->id))
         <p><em>By {{ $comment->author->name }}</em></p>
-
-        <!-- could add reply button here -->
-    
+        <!-- could add reply button here -->        
 
         @if ($comment->replies->count())
             <ul class="replies"> 

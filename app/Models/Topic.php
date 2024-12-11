@@ -9,6 +9,13 @@ class Topic extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'content',
+        'author_id',
+        'edited',
+    ];
+
     // Articles relating to topic
     public function articles() {
         return $this->hasMany(Article::class, 'topic_id');
