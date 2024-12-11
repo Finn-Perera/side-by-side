@@ -13,20 +13,25 @@ class CommentSection extends Component
     public $commentableId;
     public $commentableType;
     public $comments;
+    public $loadedCommentsCount = 10;
+    public $totalCommentsCount = 0;
+    public $parent_id = null;
 
     public function submitComment() {
         
         if (!auth()->check()) {
             session()->put('url.intended', url()->previous());
             session()->put('content', $this->commentContent);
-
+            session()->flash('message', 'You must be logged in to comment.');
+    
             return redirect()->route('login');
         }
 
         $this->validate([
-            'commentContent' => 'required',
-            'commentableId' => 'required',
-            'commentableType' => 'required',
+            'commentContent' => 'required|string|max:1000',
+            'parent_id' => 'nullable|integer|exists:comments,id',
+            'commentableType' => 'required|string',
+            'commentableId' => 'required|integer',
         ]);
 
         $comment = Comment::create([
@@ -40,13 +45,28 @@ class CommentSection extends Component
         $this->reset('commentContent');
         $this->loadComments();
     }
-
+    
     public function loadComments() {
+        $this->updateTotalComments();
+
         $this->comments = Comment::where('commentable_type',$this->commentableType)
             ->where('commentable_id', $this->commentableId)
             ->whereNull('parent_id')
             ->with('replies')
+            ->take($this->loadedCommentsCount)
             ->get();
+    }
+
+    public function loadMore() {
+        $this->loadedCommentsCount += 10;
+        $this->loadComments();
+    }
+
+    public function updateTotalComments() {
+        $this->totalCommentsCount = Comment::where('commentable_type',$this->commentableType)
+            ->where('commentable_id', $this->commentableId)
+            ->whereNull('parent_id')
+            ->count();
     }
 
     public function mount($commentable) {
