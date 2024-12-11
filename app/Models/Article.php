@@ -9,6 +9,12 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'content',
+        'author_id',
+    ];
+
     // Topic article relates to
     public function topic() {
         return $this->belongsTo(Topic::class,'topic_id');
