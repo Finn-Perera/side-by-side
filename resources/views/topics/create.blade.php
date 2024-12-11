@@ -9,7 +9,7 @@
         <p>Date of Topic: <input type="date" name="date" value="{{ old('date') }}"></p>
         <p>Content: <input type="text" name="content" value="{{ old('content') }}"></p>
         <input type="submit" value="Submit">
-        <a href="{{ route('topics.index') }}">Cancel</a>
+        <a href="{{ route('topics.index') }}" wire:navigate>Cancel</a>
     </form>
 
 @endsection

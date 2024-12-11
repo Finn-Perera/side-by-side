@@ -52,7 +52,7 @@ class CommentController extends Controller
         $comment->author_id = Auth::user()->id;
         $comment->save();
 
-        return back()->with('message', 'Comment added successfully');
+        return response()->json($comment);
     }
 
     /**

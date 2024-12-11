@@ -7,14 +7,14 @@
     <ul>
         <li> Topic: {{ $article->topic->title ?? 'Unknown' }} </li>
         <li> Title: {{ $article->title }}</li>
-        <li> Author: {{ $article->author->name ?? 'Unkown' }} </li>
+        <li> Author: <a href="{{ route('profiles.show', $article->author) }}" wire:navigate> {{ $article->author->name ?? 'Unkown' }} </a></li>
         <li> Date of Article: {{ $article->created_at }}</li>
         @if($article->edited == 1) <li> Updated: {{ $article->updated_at }}</li>@endif
     </ul>
     <h4>Content: </h4>
     <p>{{ $article->content }}</p>
 
-    <form method="post" action="{{ route('articles.destroy', $article) }}">
+    <form method="post" action="{{ route('articles.destroy', $article) }}" wire:navigate>
         @csrf
         @method('DELETE')
         <button type="submit"> Delete </button>
@@ -22,12 +22,5 @@
 @endsection
 
 @section('comments')
-    <h4>Comments Section: </h4>
-    @include('comments.partials.create-comments', ['commentable' => $article])
-
-    @if ($article->parentComments->count() > 0)
-        @include('comments.partials.display-comments', ['comments' => $article->parentComments])
-    @else
-        <p> No comments yet! </p>
-    @endif
+    @livewire('comment-section', ['commentable' => $article])
 @endsection

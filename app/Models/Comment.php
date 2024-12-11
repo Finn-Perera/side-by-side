@@ -8,7 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 // Need to enforce that when a comment under a comment is added, it has a parent id.
 class Comment extends Model
 {
+    protected $fillable = [
+        'content',
+        'commentable_type',
+        'commentable_id',
+        'parent_id',
+        'author_id'
+    ];
+
     use HasFactory;
+
+    
 
     // Parent comment
     public function parent(){
@@ -21,8 +31,8 @@ class Comment extends Model
     }
 
     // Author of comment
-    public function user() {
-        return $this->belongsTo(User::class);
+    public function author() {
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     // Allows morphing to any commentable resource

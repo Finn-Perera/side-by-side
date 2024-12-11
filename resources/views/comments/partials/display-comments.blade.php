@@ -1,13 +1,17 @@
 <ul>
 @foreach ($comments as $comment)
-    <div class="comment">
-        <li> {{ $comment->content }}</li>
-    </div>
+    <li class="comment">
+        <p>{{ $comment->content }}</p>
+        <p><em>By {{ $comment->author->name }}</em></p>
 
-    @if ($comment->replies->count())
-        <div class="replies"> 
-            @include('comments.partials.display-comments', ['comments' => $comment->replies])
-        </div>
-    @endif
+        <!-- could add reply button here -->
+    
+
+        @if ($comment->replies->count())
+            <ul class="replies"> 
+                @include('comments.partials.display-comments', ['comments' => $comment->replies])
+            </ul>
+        @endif
+    </li>
 @endforeach
 </ul>
