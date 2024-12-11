@@ -12,6 +12,10 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    const ROLE_ADMIN = 'admin';
+    const ROLE_TRUSTED = 'trusted';
+    const ROLE_USER = 'user';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -80,5 +84,13 @@ class User extends Authenticatable
             'user_user',
             'following_id',
             'follower_id');
+    }
+
+    public function isAdmin() {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isTrusted() {
+        return $this->role === self::ROLE_TRUSTED;
     }
 }

@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="submitComment">
+    <form wire:submit="submitComment">
         @csrf
         <input wire:model="commentContent" type="text" name="content" placeholder="Add a comment..." required></input>    
         <input type="hidden" wire:model="commentableType" value="{{ $commentableType }}">

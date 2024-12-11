@@ -34,7 +34,7 @@ class CommentSection extends Component
             'commentableId' => 'required|integer',
         ]);
 
-        $comment = Comment::create([
+        Comment::create([
             'content' => $this->commentContent,
             'commentable_id' => $this->commentableId,
             'commentable_type' => $this->commentableType,

@@ -11,6 +11,10 @@
     <h3>Content:</h3>
     <p>{{ $topic->content }}</p>
     
+    @can('delete', $topic)
+        @livewire('delete-topic', ['topic' => $topic])
+    @endcan
+
     <p> Articles on the topic: </p>
     <ul>
         @foreach ($topic->articles as $article)

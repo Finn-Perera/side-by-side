@@ -87,6 +87,11 @@ class TopicController extends Controller
      */
     public function destroy(Topic $topic)
     {
-        //
+        // Delete the topic
+        $topic->delete();
+    
+        // Redirect to the topics.index page after deletion
+        return redirect()->route('topics.index')->with('message', 'Topic deleted successfully');
     }
+    
 }
