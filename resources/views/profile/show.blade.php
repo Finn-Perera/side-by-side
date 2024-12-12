@@ -3,9 +3,12 @@
 @section('title', 'User Profile')
 
 @section('content')
-    <h2> {{ $user->name }} </h2>
-    <p>{{ $user->profile->bio }}</p>
-    <p><b>Location: </b>{{ $user->profile->location }}</p>
+    
+
+    @can('update', $user->profile)
+        @livewire('profile-editor', ['profile' => $user->profile, 'user' => $user])
+    @endcan
+
     <div>
         <a href="{{ route('profiles.followers', ['user' => $user]) }}" wire:navigate>Followers</a>
         <a href="{{ route('profiles.following', ['user' => $user]) }}" wire:navigate>Following</a>

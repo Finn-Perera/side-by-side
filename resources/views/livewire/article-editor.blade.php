@@ -18,8 +18,8 @@
         @include('articles.partials.content', ['article' => $article])
 
         @can('update', $article)
-        <button type="button" wire:click="startEditing">Edit Article</button>
-    @endcan
+            <button type="button" wire:click="startEditing">Edit Article</button>
+        @endcan
     @endif
 
     

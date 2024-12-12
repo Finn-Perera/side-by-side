@@ -1,8 +1,12 @@
 <div>
     @if ($user->following->contains($target))
-        <button wire:click="unfollow" type="button" class="unfollow-button">Unfollow</button>
+        @can('unfollow', $target)
+            <button wire:click="unfollow" type="button" class="unfollow-button">Unfollow</button>
+        @endcan
     @else
-        <button wire:click="follow" type="button" class="follow-button">Follow</button>
+        @can('follow', $target)
+            <button wire:click="follow" type="button" class="follow-button">Follow</button>
+        @endcan
     @endif
 
     @if (session()->has('message'))
