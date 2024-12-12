@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->text('bio')->nullable()->default(null);
-            $table->string('location')->nullable()->default(null); // not sure on this one
+            $table->string('bio')->nullable()->default("");
+            $table->string('location')->nullable()->default("Unknown"); // not sure on this one
             // think how to include social media links
             // think how to include image for avatar
             $table->timestamps();

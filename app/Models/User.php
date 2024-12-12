@@ -50,6 +50,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function follow($target) {
+        $this->following()->attach($target, ['created_at' => now()]);
+    }
+
     // Comments user has made
     public function comments() {
         return $this->hasMany(Comment::class, 'author_id');

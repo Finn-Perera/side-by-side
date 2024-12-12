@@ -29,6 +29,12 @@ class DatabaseSeeder extends Seeder
         $user->role = 'admin';
         $user->save();
 
+        $profile = new Profile;
+        $profile->user_id = 31;
+        $profile->bio = 'Example bio';
+        $profile->location = 'Swansea, United Kingdom';
+        $profile->save();
+
         // Create topics
         $topics = Topic::factory(12)->create();
 

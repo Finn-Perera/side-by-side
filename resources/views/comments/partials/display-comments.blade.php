@@ -2,7 +2,7 @@
 @foreach ($comments as $comment)
     <li class="comment">
         @livewire('comment-editor', ['comment' => $comment], key($comment->id))
-        <p><em>By {{ $comment->author->name }}</em></p>
+        <p><em>By <a href="{{ route('profiles.show', $comment->author) }}" wire:navigate>{{ $comment->author->name }} </a></em></p>
         <!-- could add reply button here -->        
 
         @if ($comment->replies->count())
