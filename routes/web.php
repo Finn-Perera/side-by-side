@@ -10,16 +10,18 @@ use App\Http\Controllers\UserFollowController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/topics');
 });
-
-Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
 
 Route::get('/topics/create', [TopicController::class, 'create'])->middleware(['auth'])->name('topics.create');
 
+Route::get('/topics/{topic}', [TopicController::class, 'show'])->name('topics.show');
+
+Route::get('/topics', [TopicController::class, 'index'])->name('topics.index');
+
+
 Route::post('/topics', [TopicController::class, 'store'])->name('topics.store');
 
-Route::get('/topics/{topic}', [TopicController::class, 'show'])->name('topics.show');
 
 
 Route::get('/articles/{article}', [ArticleController::class, 'show'])->name('articles.show');
@@ -35,8 +37,6 @@ Route::get('/users{user}/comments', [CommentController::class, 'showUserComments
 Route::get('/users/{user}/topics', [TopicController::class, 'showUserTopics'])->name('users.topics');
 
 Route::get('/users/{user}/articles', [ArticleController::class, 'showUserArticles'])->name('users.articles');
-
-
 
 Route::get('/users/{user}/profile', action: [ProfileController::class, 'show'])->name('profiles.show');
 

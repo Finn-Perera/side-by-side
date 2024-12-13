@@ -1,6 +1,3 @@
 <div>
-    <button wire:click="deleteTopic" class="btn btn-danger">Delete Topic</button>
-    @if (session()->has('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
+    <button wire:click="deleteTopic" class="mt-4 bg-red-500 px-6 py-2 rounded-lg hover:bg-red-600">Delete Topic</button>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use Illuminate\Support\Facades\Http;
+use Livewire\Attributes\Validate;
 use Livewire\Component;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
@@ -10,12 +11,16 @@ use App\Notifications\CommentRecieved;
 
 class CommentSection extends Component
 {
+    #[Validate('required|string|max:255')]
     public $commentContent = '';
+    #[Validate('required|integer')]
     public $commentableId;
+    #[Validate('required|string')]
     public $commentableType;
     public $comments;
     public $loadedCommentsCount = 10;
     public $totalCommentsCount = 0;
+    #[Validate('nullable|integer|exists:comments,id')]
     public $parent_id = null;
 
     public function submitComment() {
@@ -28,12 +33,7 @@ class CommentSection extends Component
             return redirect()->route('login');
         }
 
-        $this->validate([
-            'commentContent' => 'required|string|max:1000',
-            'parent_id' => 'nullable|integer|exists:comments,id',
-            'commentableType' => 'required|string',
-            'commentableId' => 'required|integer',
-        ]);
+        $this->validate();
 
         $comment = Comment::create([
             'content' => $this->commentContent,
@@ -57,7 +57,7 @@ class CommentSection extends Component
             ->whereNull('parent_id')
             ->with('replies')
             ->take($this->loadedCommentsCount)
-            ->get();
+            ->get();    
     }
 
     public function loadMore() {

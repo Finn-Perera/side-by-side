@@ -8,16 +8,17 @@ use Livewire\Component;
 class DeleteArticle extends Component
 {
     public $article;
-
+    
     public function deleteArticle() {
         try { 
             $this->authorize('delete', $this->article);
-
-            $this->article->delete();
             $parent_topic = $this->article->topic;
-            $route = $parent_topic == null ? route('topics.index') : route('topics.show', $parent_topic);
+            $route = $parent_topic ? route('topics.show', $parent_topic) : route('topics.index');
+            $this->article->delete();
+
             session()->flash('success', 'Article deleted successfully');
-            $this->redirect($route, navigate:true);
+            session()->save();
+            $this->redirect($route);
         }
         catch (AuthorizationException $e) {
             session()->flash('error', 'You do not have permission to delete this article.');

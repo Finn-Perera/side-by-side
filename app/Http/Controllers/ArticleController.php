@@ -41,9 +41,7 @@ class ArticleController extends Controller
     }
 
     public function showUserArticles(User $user) {
-        $articles = $user->articles();
-        
-        return view('users.articles', ['user' => $user, 'articles' => $articles]);
+        return view('users.articles', ['user' => $user]);
     }
 
     /**

@@ -1,10 +1,8 @@
 <div>
     @if ($isEditing)
         <form wire:submit="updateComment">
-            <div>
-                <textarea wire:model.live="content" required></textarea>
-                @error('content') <span class="error">{{ $message }}</span> @enderror
-            </div>
+            <textarea wire:model.live="content" required class="w-full p-2 border rounded none"></textarea>
+            @error('content') <span class="error">{{ $message }}</span> @enderror
 
             <button type="submit">Save</button>
             <button type="button" wire:click="cancelEditing">Cancel</button>

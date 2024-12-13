@@ -38,8 +38,7 @@ class CommentController extends Controller
      * Show users comments.
      */
     public function showUserComments(User $user) {
-        $comments = $user->comments()->with('commentable')->get();
-        return view('users.comments', ['user' => $user, 'comments' => $comments]);
+        return view('users.comments', ['user' => $user]);
     }
 
     /**
