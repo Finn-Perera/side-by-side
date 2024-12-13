@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Livewire\Component;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\CommentRecieved;
 
 class CommentSection extends Component
 {
@@ -34,13 +35,15 @@ class CommentSection extends Component
             'commentableId' => 'required|integer',
         ]);
 
-        Comment::create([
+        $comment = Comment::create([
             'content' => $this->commentContent,
             'commentable_id' => $this->commentableId,
             'commentable_type' => $this->commentableType,
             'parent_id' => $this->parent_id,
             'author_id' => Auth::user()->id,
         ]);
+        
+        $comment->commentable->author->notify(new CommentRecieved($comment));
 
         $this->reset('commentContent', 'parent_id');
         $this->loadComments();
