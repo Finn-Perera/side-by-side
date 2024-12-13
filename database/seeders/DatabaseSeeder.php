@@ -36,17 +36,17 @@ class DatabaseSeeder extends Seeder
         $profile->save();
 
         // Create topics
-        $topics = Topic::factory(12)->create();
+        $topics = Topic::factory(28)->create();
 
         // Create articles
-        $articles = Article::factory(20)->create();
+        $articles = Article::factory(48)->create();
 
         // Create root comments (no parent)
-        Comment::factory(50)->create();
+        Comment::factory(100)->create();
 
         // Child comments
-        Comment::factory()->count(20)->child()->create();
+        Comment::factory()->count(50)->child()->create();
         // Can create more deep comment chain with more calls
-        Comment::factory()->count(15)->child()->create();
+        Comment::factory()->count(40)->child()->create();
     }
 }
