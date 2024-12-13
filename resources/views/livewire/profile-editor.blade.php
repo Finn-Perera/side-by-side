@@ -8,10 +8,10 @@
             </div>
 
             <div>
-                <div>Location:</div>
-                <input type="search" wire:model.live="location">
-                @error('location') <span class="error">{{ $message }}</span> @enderror
+                <label>Current Location</label>
+                <livewire:location-dropdown :country="$location" key="{{ now() }}" />
             </div>
+
 
             <button type="submit">Save</button>
             <button type="button" wire:click="cancelEditing">Cancel</button>
@@ -20,7 +20,7 @@
         <!-- Include viewing profile here -->    
         <h2> {{ $user->name }} </h2>
         <p>{{ $user->profile->bio }}</p>
-        <p><b>Location: </b>{{ $user->profile->location }}</p>
+        <p><b>Location: </b>{{ $location }}</p>
 
 
         @can('update', $profile)

@@ -12,6 +12,8 @@ class Profile extends Model
     protected $fillable = [
         'bio',
         'location',
+        'latitude',
+        'longitude',
     ];
 
     public function user() {

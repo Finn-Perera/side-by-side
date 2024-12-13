@@ -16,6 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('bio')->nullable()->default("");
             $table->string('location')->nullable()->default("Unknown"); // not sure on this one
+            $table->float('latitude')->nullable()->default(null);
+            $table->float('longitude')->nullable()->default(null);
             // think how to include social media links
             // think how to include image for avatar
             $table->timestamps();
