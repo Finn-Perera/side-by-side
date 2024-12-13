@@ -29,7 +29,6 @@ class ProfileEditor extends Component
         $this->latitude = $location['latitude'];
         $this->longitude = $location['longitude']; 
 
-
         session()->flash('message', 'Location found.');
     }
 
@@ -55,6 +54,8 @@ class ProfileEditor extends Component
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
         ]);
+        
+        $this->dispatch('clear-weather-data');
 
         $this->isEditing = false;
         session()->flash('message', 'Profile successfully updated.');

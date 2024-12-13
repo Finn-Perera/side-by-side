@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'geonames' => [
+        'username' => env('GEONAMES_USERNAME'),
+    ],
+
+    'openweather' => [
+        'key' => env('OPENWEATHER_KEY'),
+    ],
 ];

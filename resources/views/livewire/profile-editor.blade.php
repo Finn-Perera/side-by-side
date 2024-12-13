@@ -17,7 +17,6 @@
             <button type="button" wire:click="cancelEditing">Cancel</button>
         </form>
     @else
-        <!-- Include viewing profile here -->    
         <h2> {{ $user->name }} </h2>
         <p>{{ $user->profile->bio }}</p>
         <p><b>Location: </b>{{ $location }}</p>

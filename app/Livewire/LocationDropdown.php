@@ -33,8 +33,9 @@ class LocationDropdown extends Component
             return;
         }
 
+        $this->geonamesUsername = config('services.geonames.username');
+
         $this->apiUrl = 'http://api.geonames.org/searchJSON';
-        $this->geonamesUsername = config('geonames.geonames');
         if (!$this->geonamesUsername) {
             throw new \Exception('GeoNames username is not in the environment.');
         }
@@ -90,7 +91,9 @@ class LocationDropdown extends Component
     public function fetchLocationByGeonameId($geonameId)
     {
         $this->apiUrl = 'http://api.geonames.org/get';
-        $this->geonamesUsername = config('geonames.geonames');
+
+        $this->geonamesUsername = config(key: 'services.geonames.username');
+
 
         if (!$this->geonamesUsername) {
             throw new \Exception('GeoNames username is not in the environment.');
@@ -107,7 +110,6 @@ class LocationDropdown extends Component
 
         return null;
     }
-
 
     public function render()
     {

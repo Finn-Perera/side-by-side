@@ -15,6 +15,5 @@
             @endforeach
         @endif
     </select>
-
     <button wire:click="updateSelectedLocation">Click to confirm selection</button>
 </div>
