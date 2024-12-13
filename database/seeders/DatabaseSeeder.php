@@ -35,6 +35,21 @@ class DatabaseSeeder extends Seeder
         $profile->location = 'Swansea, United Kingdom';
         $profile->save();
 
+
+        $user = new User;
+        $user->name = 'example trusted';
+        $user->email = 'name2@example.com';
+        $user->password = Hash::make('password1');
+        $user->remember_token = Str::random(10);
+        $user->role = 'trusted';
+        $user->save();
+
+        $profile = new Profile;
+        $profile->user_id = 32;
+        $profile->bio = 'Example bio';
+        $profile->location = 'Swansea, United Kingdom';
+        $profile->save();
+
         // Create topics
         $topics = Topic::factory(28)->create();
 
